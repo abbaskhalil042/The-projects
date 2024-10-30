@@ -1,16 +1,16 @@
-import ChatSec from "../components/ChatSec"
-import Right from "../components/Right"
+import ChatSec from "../components/ChatSec";
+import Left from "../components/Left";
+import Right from "../components/Right";
 
 const Chat = () => {
   return (
-    <div>
-      
-     <ChatSec/>
+    <div className="flex">
+      <Left />
+      <ChatSec />
 
-     <Right/> 
-
+      <Right />
     </div>
-  )
-}
+  );
+};
 
-export default Chat
+export default Chat;

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Right = () => {
   return (
-    <div>Right</div>
+    <div className='right w-1/4 h-screen bg-blue-500'>Right</div>
   )
 }
 
