@@ -1,6 +1,15 @@
+import ChatSec from "../components/ChatSec"
+import Right from "../components/Right"
+
 const Chat = () => {
   return (
-    <div>Chat</div>
+    <div>
+      
+     <ChatSec/>
+
+     <Right/> 
+
+    </div>
   )
 }
 
