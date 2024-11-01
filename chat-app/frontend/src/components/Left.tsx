@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import assets from "../assets/assets.ts";
 const Left = () => {
   return (
@@ -30,7 +31,7 @@ const Left = () => {
                 </summary>
                 <ul className="menu dropdown-content rounded-box z-[1] w-[8rem] p-2 shadow bg-slate-800">
                   <li>
-                    <a>Edit profile</a>
+                    <Link to="/profile">Edit profile</Link>
                   </li>
                   {/* <li> */}
                     <hr />

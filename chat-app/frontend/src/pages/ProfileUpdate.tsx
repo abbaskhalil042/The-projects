@@ -30,7 +30,7 @@ const ProfileUpdate = () => {
                 accept=".png, .jpg,.jpeg"
                 hidden
               />
-              <img className="w-1/1 rounded-full object-scale-down" src={ image ? URL.createObjectURL(image) : assets.avatar_icon} alt="" />
+              <img className="w-1/1 rounded-full object-scale-down" src={ image ? URL.createObjectURL(image) : assets.profile} alt="" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -62,7 +62,7 @@ const ProfileUpdate = () => {
         </form>
         <img
           className="w-1/4 rounded-lg"
-          src={ image ? URL.createObjectURL(image) : assets.avatar_icon}
+          src={ image ? URL.createObjectURL(image) : assets.profile}
           alt=""
         />
       </div>

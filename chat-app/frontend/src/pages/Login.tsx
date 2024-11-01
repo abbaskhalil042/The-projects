@@ -77,10 +77,7 @@ const Login = () => {
         >
           {currState}
         </button>
-        <div className="flex gap-2">
-          <input type="checkbox" className="outline-none mt-1" />
-          <p> agree to the terms of use & privacy policy</p>
-        </div>
+
         <p className="flex justify-evenly">
           {currState === "Sign up" ? (
             <span className="">Already have an account?</span>

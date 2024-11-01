@@ -1,7 +1,9 @@
+import { logout } from "../config/firebase";
+import chatBg from "/chatBg.png"
+
 const ChatSec = () => {
   return (
     <div className="flex flex-col w-1/2 h-screen shadow-2xl rounded-lg overflow-hidden">
-      {/* Top section (User info) */}
       <div className="user-name bg-slate-800 flex  gap-2 items-center px-2 py-1 shadow-2xl sticky top-0 z-10">
         <img
           className="w-10 rounded-full"
@@ -15,27 +17,51 @@ const ChatSec = () => {
             </h2>
             <p className="text-sm opacity-50 text-white">Online</p>
           </div>
+          <div className="flex items-center gap-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="size-6 cursor-pointer"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+              />
+            </svg>
 
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="size-6 cursor-pointer"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
-            />
-          </svg>
+            <button
+              className="btn btn-circle flex items-center justify-center bg-slate-800 cursor-pointer"
+              onClick={() => logout()}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Chat messages section (Scrollable) */}
       {/* <div className=""> */}
-      <div className="flex-1 overflow-y-auto p-2 no-scrollbar rounded-r-lg">
+      <div
+        className="flex-1 overflow-y-auto p-2 no-scrollbar rounded-r-lg object-cover"
+        style={{ backgroundImage: `url(${chatBg})` }}
+      >
         {Array(5)
           .fill(0)
           .map((_, i) => (
