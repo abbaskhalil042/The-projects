@@ -28,12 +28,15 @@ const Left = () => {
                     />
                   </svg>
                 </summary>
-                <ul className="menu dropdown-content rounded-box z-[1] w-52 p-2 shadow bg-slate-900">
+                <ul className="menu dropdown-content rounded-box z-[1] w-[8rem] p-2 shadow bg-slate-800">
                   <li>
-                    <a>Item 1</a>
+                    <a>Edit profile</a>
                   </li>
+                  {/* <li> */}
+                    <hr />
+                  {/* </li> */}
                   <li>
-                    <a>Item 2</a>
+                    <a>Logout</a>
                   </li>
                 </ul>
               </details>
