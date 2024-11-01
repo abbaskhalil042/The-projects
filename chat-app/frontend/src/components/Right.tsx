@@ -1,7 +1,10 @@
+import { logout } from "../config/firebase";
+
 const Right = () => {
   return (
     <div className="right w-1/4 h-screen bg-slate-900 border-l overflow-y-auto no-scrollbar ">
       <div className="flex flex-col justify-center mt-6 items-center sticky top-0 bg-slate-900 shadow-2xl z-2 ">
+        <button onClick={() => logout()}>logout</button>
         <div>
           <img
             className="w-24 rounded-full"
