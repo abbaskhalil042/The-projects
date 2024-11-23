@@ -7,26 +7,30 @@ export const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     console.log(req.body);
-    console.log("hello from signup");
 
-    if (!name || !email || (!password && password.length < 6)) {
-      return res.status(400).json({ message: "All fields are required" });
+
+    // Validate fields
+    if (!name || !email || !password || password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "All fields are required and password must be at least 6 characters" });
     }
 
+    // Check if user already exists
     const user = await User.findOne({ email });
-
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
 
+    // Hash password
     const hashedPass = await bcrypt.hash(password, 10);
 
+    // Create a new user
     const newUser = new User({ name, email, password: hashedPass });
 
-    // const newUser = await User.create({ name, email, password: hashedPass });
-
+    // Save and respond
     if (newUser) {
-      generateToken(newUser._id, res);
+      generateToken(newUser._id, res); // Assuming this sets a token in the response
       await newUser.save();
     }
 
@@ -87,12 +91,18 @@ export const logout = (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { profile } = req.body;
+    const userId = req.user?._id;
 
-    const userId = req.user._id;
-    if (!profile) {
-      return res.status(400).json({ message: "profile pic is required!" });
+    console.log("Request Body:", req.body);
+    console.log("User ID:", userId);
+    console.log("Profile:", profile);
+
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized! User not found." });
     }
-
+    if (!profile) {
+      return res.status(400).json({ message: "Profile pic is required!" });
+    }
     const uploadResponse = await cloudinary.uploader.upload(profile);
     const updatedUser = await User.findByIdAndUpdate(
       userId,
@@ -101,18 +111,17 @@ export const updateProfile = async (req, res) => {
     );
     res.status(200).json(updatedUser);
   } catch (error) {
-    console.log(error);
+    console.error("Error:", error);
     return res.status(500).json({ message: error.message });
   }
 };
 
-export const checkAuth = async (req, res) => {
 
+export const checkAuth = async (req, res) => {
   console.log("hello from check auth");
   console.log(req.user);
 
   try {
-
     return res.status(200).json(req.user);
   } catch (error) {
     console.log(error);

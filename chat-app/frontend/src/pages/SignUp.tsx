@@ -1,26 +1,25 @@
 import { useState } from "react";
 import assets from "../assets/assets.ts";
 import bg from "/background.png";
-import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore.ts";
+import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 
-// import { toast } from "react-toastify";
-// import { signup, login } from "../config/firebase.ts";
-// import { useNavigate } from "react-router-dom";
-const Login = () => {
+const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate() ;
 
-  const { login, isLoggingIn } = useAuthStore();
+  const { signup, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    if (!username) {
+      toast.error("Username is required.");
+      return false;
+    }
     if (!email || !emailRegex.test(email)) {
       toast.error("Enter a valid email address.");
       return false;
@@ -34,31 +33,36 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    console.log({ username, email, password }); // Log the form data
+
     try {
-      if (!validateForm()) {
+      if (validateForm()) {
+        await signup({ username, email, password });
+      } else {
         toast.error("All fields are required");
-        return;
       }
-      console.log({ email, password });
-      await login({ email, password });
     } catch (error) {
-      console.log(error);
-      toast.error((error as Error).message);
+      console.error(error);
     }
   };
 
   return (
-    <div
-      className="login min-h-dvh flex items-center justify-evenly font-poppins"
-      style={{ backgroundImage: `url(${bg})` }}
-    >
+    <div className="login min-h-screen flex items-center justify-evenly font-poppins">
       <img className="h-1/3 w-1/4" src={assets.logo_big} alt="Logo" />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-3 bg-slate-300 p-4 rounded-md"
       >
-        <h2 className="text-2xl font-medium">Login</h2>
-
+        <h2 className="text-2xl font-medium">Sign Up</h2>
+        <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+          className="p-2 rounded-md outline-none"
+          placeholder="Full name"
+          required
+        />
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -67,16 +71,14 @@ const Login = () => {
           placeholder="Email"
           required
         />
-
         <div className="relative">
-          <button type="button" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? (
-              <Eye className="absolute right-2 top-1/4 cursor-pointer" />
-            ) : (
-              <EyeOff className="absolute right-2 top-1/4 cursor-pointer" />
-            )}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 top-2/4 transform -translate-y-2/4"
+          >
+            {showPassword ? <Eye /> : <EyeOff />}
           </button>
-
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -86,23 +88,26 @@ const Login = () => {
             required
           />
         </div>
-
         <button
-          className="p-2 rounded-md bg-orange-700 "
+          className={`p-2 rounded-md bg-orange-700  ${
+            isSigningUp ? "opacity-50 cursor-not-allowed" : ""
+          }`}
           type="submit"
-          disabled={isLoggingIn}
+          disabled={isSigningUp}
         >
-          login
+          {isSigningUp ? "Submitting..." : "Submit"}
         </button>
         <p className="flex justify-evenly">
-          <span>Don't have an account?</span>
-          <span className="text-orange-700 font-bold hover:underline cursor-pointer">
-            <Link to="/signup">SignUp</Link>
-          </span>
+          <Link
+            to="/login"
+            className="text-orange-700 font-bold hover:underline"
+          >
+            Already have an account? Login here.
+          </Link>
         </p>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;

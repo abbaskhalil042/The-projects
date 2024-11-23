@@ -1,45 +1,64 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Chat from "./pages/Chat";
 import ProfileUpdate from "./pages/ProfileUpdate";
 import { ToastContainer } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
-import { useContext, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./config/firebase";
-import { AppContext } from "./context/AppContext";
+
+import HomePage from "./pages/HomePage";
+import SignUp from "./pages/SignUp";
+import SettingPage from "./pages/SettingPage";
+import { useAuthStore } from "./store/useAuthStore";
+import { useEffect } from "react";
+import { Loader } from "lucide-react";
+import Navbar from "./components/Navbar";
+import { useThemes } from "./store/useThemes";
+
 const App = () => {
-  const navigate = useNavigate();
-
-  const context = useContext(AppContext);
-
-  if (!context) {
-    throw new Error("AppContext not found");
-  }
-
-  const { loadUserData } = context;
+  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const { theme, setTheme } = useThemes();
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        navigate("/chat");
-        await loadUserData(user.uid);
-      } else {
-        navigate("/");
-      }
-    });
-  }, []);
+    checkAuth();
+  }, [checkAuth]);
+
+  console.log(authUser);
+
+  if (isCheckingAuth && !authUser) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader className="animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <>
-      <div>
-        <ToastContainer />
+      <div data-theme={theme}>
+        <div>
+          <ToastContainer />
+        </div>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={authUser ? <Chat /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/signup"
+            element={!authUser ? <SignUp /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/login"
+            element={!authUser ? <Login /> : <Navigate to="/" />}
+          />
+          <Route path="/setting" element={<SettingPage />} />
+          <Route
+            path="/profile"
+            element={authUser ? <ProfileUpdate /> : <Navigate to="/login" />}
+          />
+        </Routes>
       </div>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/profile" element={<ProfileUpdate />} />
-      </Routes>
     </>
   );
 };

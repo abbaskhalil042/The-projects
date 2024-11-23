@@ -1,10 +1,9 @@
-import { logout } from "../config/firebase";
-import chatBg from "/chatBg.png"
+
 
 const ChatSec = () => {
   return (
-    <div className="flex flex-col w-1/2 h-screen shadow-2xl rounded-lg overflow-hidden">
-      <div className="user-name bg-slate-800 flex  gap-2 items-center px-2 py-1 shadow-2xl sticky top-0 z-10">
+    <div className="flex flex-col mt- w-1/2 h-screen rounded-lg overflow-hidden">
+      <div className="user-name  flex  gap-2 items-center px-2 py-1 shadow-3xl border-b-2 border-white  rounded-lg sticky top-0 z-10">
         <img
           className="w-10 rounded-full"
           src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
@@ -12,10 +11,8 @@ const ChatSec = () => {
         />
         <div className="flex justify-between w-full items-center">
           <div className="flex flex-col">
-            <h2 className="text-2xl font-medium text-white">
-              Anakin Skywalker
-            </h2>
-            <p className="text-sm opacity-50 text-white">Online</p>
+            <h2 className="text-2xl font-medium ">Anakin Skywalker</h2>
+            <p className="text-sm opacity-50 ">Online</p>
           </div>
           <div className="flex items-center gap-3">
             <svg
@@ -33,9 +30,9 @@ const ChatSec = () => {
               />
             </svg>
 
-            <button
+            {/* <button
               className="btn btn-circle flex items-center justify-center bg-slate-800 cursor-pointer"
-              onClick={() => logout()}
+              // onClick={() => logout()}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +48,7 @@ const ChatSec = () => {
                   d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
                 />
               </svg>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -60,7 +57,7 @@ const ChatSec = () => {
       {/* <div className=""> */}
       <div
         className="flex-1 overflow-y-auto p-2 no-scrollbar rounded-r-lg object-cover"
-        style={{ backgroundImage: `url(${chatBg})` }}
+  
       >
         {Array(5)
           .fill(0)
@@ -127,7 +124,7 @@ const ChatSec = () => {
       {/* </div> */}
 
       {/* Input section (Fixed at bottom) */}
-      <div className="bg-slate-800 p-1 mt-8 flex gap-2 items-center fixed bottom-0 w-1/2 ">
+      <div className="bg-white shadow-2xl p-1 mt-8 flex gap-2 items-center fixed bottom-0 w-1/2 ">
         <input
           type="text"
           placeholder="Type your message"

@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import assets from "../assets/assets.ts";
 const Left = () => {
   return (
-    <div className="left w-1/4 h-screen border-r overflow-auto no-scrollbar bg-slate-900 ">
+    <div className="left w-1/4 h-screen  border-r-2 border-white overflow-auto no-scrollbar  ">
       <div>
-        <div className="flex flex-col gap-2 sticky w-full top-0 z-20 bg-slate-900 shadow-2xl ">
+        <div className="flex flex-col gap-2 sticky w-full top-0 z-20 bg-white shadow-2xl ">
           <div className="flex justify-between items-center px-2">
             <h1 className="text-2xl font-medium flex items-center ">
               <img className="h-1/3 w-1/6" src={assets.logo_icon} alt="" />
@@ -12,8 +12,7 @@ const Left = () => {
             </h1>
             <div className="   ">
               <details className="dropdown dropdown-left ">
-                <summary className="btn m-1 bg-slate-900 hover:bg-slate-900 btn-circle">
-                
+                <summary className="btn m-1  btn-circle">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -34,7 +33,7 @@ const Left = () => {
                     <Link to="/profile">Edit profile</Link>
                   </li>
                   {/* <li> */}
-                    <hr />
+                  <hr />
                   {/* </li> */}
                   <li>
                     <a>Logout</a>
@@ -84,7 +83,7 @@ const Left = () => {
                   </div>
                   <div className="">
                     <h2 className="text-lg font-medium ">Anakin Skywalker</h2>
-                    <p className="text-sm text-gray-500">How are you?</p>
+                    <p className="text-sm ">How are you?</p>
                   </div>
                 </div>
               </div>

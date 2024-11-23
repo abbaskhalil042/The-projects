@@ -1,8 +1,7 @@
 const Right = () => {
   return (
-    <div className="right w-1/4 h-screen bg-slate-900 border-l overflow-y-auto no-scrollbar ">
-      <div className="flex flex-col justify-center mt-6 items-center sticky top-0 bg-slate-900 shadow-2xl z-2 ">
-   
+    <div className="right w-1/4 h-screen  border-l-2 border-white overflow-y-auto no-scrollbar ">
+      <div className="flex flex-col justify-center text-black  items-center sticky top-0 bg-gray-200 shadow-2xl z-2 ">
         <div>
           <img
             className="w-24 rounded-full"
@@ -14,7 +13,7 @@ const Right = () => {
           <h1> Anakin Skywalker </h1>
           <p>Hey, there I am your friend</p>
           <span>Online</span>
-          <div className="w-full h-0.5 bg-white" />
+          <div className="w-full h-0.5 " />
           <span>Media</span>
         </div>
       </div>

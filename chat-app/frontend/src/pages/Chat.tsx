@@ -4,10 +4,9 @@ import Right from "../components/Right";
 
 const Chat = () => {
   return (
-    <div className="flex">
+    <div className="flex pt-1">
       <Left />
       <ChatSec />
-
       <Right />
     </div>
   );
